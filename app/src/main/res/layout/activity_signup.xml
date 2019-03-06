@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_gravity="center"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/btn_nd_txt"
+            android:layout_marginTop="20dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/edit_username"
+                style="@style/editText"
+                android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+                android:hint="@string/user"
+                android:background="@drawable/editext" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/edit_email"
+                style="@style/editText"
+                android:background="@drawable/editext"
+                android:drawableLeft="@drawable/ic_mail_black_24dp"
+                android:hint="@string/prompt_email" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/edit_phoneno"
+                style="@style/editText"
+                android:background="@drawable/editext"
+                android:drawableLeft="@drawable/ic_mail_black_24dp"
+                android:hint="PHONE NO" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/edit_password"
+                style="@style/editText"
+                android:background="@drawable/editext"
+                android:drawableLeft="@drawable/ic_https_black_24dp"
+                android:hint="@string/password" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/edit_cnfpassword"
+                style="@style/editText"
+                android:background="@drawable/editext"
+                android:drawableLeft="@drawable/ic_https_black_24dp"
+                android:hint="CONFIRM PASSWORD" />
+        </android.support.design.widget.TextInputLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp">
+
+            <CheckBox
+                android:id="@+id/check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/agree_text"
+                style="@style/text_normal"
+                android:text="By Registering with GoalGeta, you agree with our"
+                android:layout_marginLeft="40dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <TextView
+                android:id="@+id/TOC"
+                style="@style/text_normal"
+                android:text="Terms Of Service"
+                android:layout_marginLeft="40dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_below="@id/agree_text"
+                android:textColor="@color/btn_nd_txt"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/signup"
+            style="@style/btn"
+            android:text="@string/signup"
+            android:layout_marginTop="40dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/acct_exist"
+                android:textColor="@color/btn_nd_txt"
+                android:textSize="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/signin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signin"
+                android:textStyle="bold"
+                android:textColor="@color/btn_nd_txt"
+                android:textSize="?android:attr/textAppearanceMedium"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="16dp"
+                android:clickable="true"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
