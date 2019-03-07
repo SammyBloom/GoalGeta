@@ -1,5 +1,6 @@
 package com.android.goalgeta;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
@@ -54,6 +55,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.TOC:
                 break;
             case R.id.signin:
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(intent);
                 break;
         }
     }

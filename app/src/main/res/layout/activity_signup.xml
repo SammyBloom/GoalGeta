@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
+            android:fontFamily="@font/black_ops_one"
             android:layout_gravity="center"
             android:textSize="40sp"
             android:textStyle="bold"
@@ -101,15 +102,13 @@
                 android:id="@+id/agree_text"
                 style="@style/text_normal"
                 android:text="By Registering with GoalGeta, you agree with our"
-                android:layout_marginLeft="40dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:layout_marginLeft="40dp" />
 
             <TextView
                 android:id="@+id/TOC"
                 style="@style/text_normal"
                 android:text="Terms Of Service"
                 android:layout_marginLeft="40dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_below="@id/agree_text"
                 android:textColor="@color/btn_nd_txt"/>
 
@@ -119,7 +118,8 @@
             android:id="@+id/signup"
             style="@style/btn"
             android:text="@string/signup"
-            android:layout_marginTop="40dp" />
+            android:layout_marginTop="30dp"
+            android:textColor="@color/white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -130,10 +130,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/acct_exist"
-                android:textColor="@color/btn_nd_txt"
-                android:textSize="?android:attr/textAppearanceMedium"
-                android:layout_marginTop="16dp" />
+                android:textColor="@color/btn_nd_txt" />
 
             <TextView
                 android:id="@+id/signin"
@@ -142,7 +141,6 @@
                 android:text="@string/signin"
                 android:textStyle="bold"
                 android:textColor="@color/btn_nd_txt"
-                android:textSize="?android:attr/textAppearanceMedium"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="16dp"
                 android:clickable="true"/>

@@ -6,6 +6,4 @@
                 android:startColor="@color/first_color" />
         </shape>
     </item>
-    <item
-        android:drawable="@drawable/background" />
 </layer-list>
