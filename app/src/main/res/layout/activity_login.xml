@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".activities.LoginActivity">
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
-            android:fontFamily="@font/black_ops_one"
+            android:fontFamily="@font/adamina"
             android:text="@string/app_name"
             android:textColor="@color/btn_nd_txt"
             android:textSize="60sp"
@@ -34,11 +34,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:fontFamily="sans-serif"
             android:text="@string/user"
             android:textColor="@color/btn_nd_txt"
-            android:layout_gravity="center"
-            android:textSize="18sp"
-            android:layout_marginTop="60dp"/>
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,11 +67,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:fontFamily="sans-serif"
             android:text="@string/password"
             android:textColor="@color/btn_nd_txt"
-            android:layout_gravity="center"
-            android:textSize="18sp"
-            android:layout_marginTop="40dp"/>
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,17 +103,20 @@
             style="@style/btn"
             android:text="@string/login"
             android:layout_marginTop="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
             android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/forgot_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/forgot_pass"
-            android:textColor="@color/btn_nd_txt"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:clickable="true"/>
+            android:clickable="true"
+            android:fontFamily="sans-serif"
+            android:text="@string/forgot_pass"
+            android:textColor="@color/btn_nd_txt" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -122,20 +127,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="cursive"
                 android:text="@string/no_acct"
-                android:textColor="@color/btn_nd_txt"
-                android:layout_marginTop="16dp" />
+                android:textColor="@color/btn_nd_txt" />
 
             <TextView
                 android:id="@+id/sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/signup"
-                android:textStyle="bold"
-                android:textColor="@color/btn_nd_txt"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="16dp"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:fontFamily="sans-serif"
+                android:text="@string/signup"
+                android:textColor="@color/btn_nd_txt"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

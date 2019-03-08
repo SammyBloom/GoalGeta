@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignupActivity">
+    tools:context=".activities.SignupActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,13 +15,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:fontFamily="@font/black_ops_one"
             android:layout_gravity="center"
-            android:textSize="40sp"
-            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/adamina"
+            android:text="@string/app_name"
             android:textColor="@color/btn_nd_txt"
-            android:layout_marginTop="20dp" />
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -31,9 +31,10 @@
             <EditText
                 android:id="@+id/edit_username"
                 style="@style/editText"
+                android:background="@drawable/editext"
                 android:drawableLeft="@drawable/ic_account_circle_black_24dp"
-                android:hint="@string/user"
-                android:background="@drawable/editext" />
+                android:fontFamily="sans-serif-medium"
+                android:hint="@string/user" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -46,6 +47,7 @@
                 style="@style/editText"
                 android:background="@drawable/editext"
                 android:drawableLeft="@drawable/ic_mail_black_24dp"
+                android:fontFamily="sans-serif-medium"
                 android:hint="@string/prompt_email" />
         </android.support.design.widget.TextInputLayout>
 
@@ -58,7 +60,8 @@
                 android:id="@+id/edit_phoneno"
                 style="@style/editText"
                 android:background="@drawable/editext"
-                android:drawableLeft="@drawable/ic_mail_black_24dp"
+                android:drawableLeft="@drawable/ic_call_black_24dp"
+                android:fontFamily="sans-serif-medium"
                 android:hint="PHONE NO" />
         </android.support.design.widget.TextInputLayout>
 
@@ -72,6 +75,7 @@
                 style="@style/editText"
                 android:background="@drawable/editext"
                 android:drawableLeft="@drawable/ic_https_black_24dp"
+                android:fontFamily="sans-serif-medium"
                 android:hint="@string/password" />
         </android.support.design.widget.TextInputLayout>
 
@@ -85,6 +89,7 @@
                 style="@style/editText"
                 android:background="@drawable/editext"
                 android:drawableLeft="@drawable/ic_https_black_24dp"
+                android:fontFamily="sans-serif-medium"
                 android:hint="CONFIRM PASSWORD" />
         </android.support.design.widget.TextInputLayout>
 
@@ -101,25 +106,28 @@
             <TextView
                 android:id="@+id/agree_text"
                 style="@style/text_normal"
-                android:text="By Registering with GoalGeta, you agree with our"
-                android:layout_marginLeft="40dp" />
+                android:layout_marginLeft="40dp"
+                android:fontFamily="sans-serif"
+                android:text="By Registering with GoalGeta, you agree with our" />
 
             <TextView
                 android:id="@+id/TOC"
                 style="@style/text_normal"
-                android:text="Terms Of Service"
-                android:layout_marginLeft="40dp"
                 android:layout_below="@id/agree_text"
-                android:textColor="@color/btn_nd_txt"/>
+                android:layout_marginLeft="40dp"
+                android:fontFamily="sans-serif"
+                android:text="Terms Of Service"
+                android:textColor="@color/btn_nd_txt" />
 
         </RelativeLayout>
 
         <Button
             android:id="@+id/signup"
             style="@style/btn"
-            android:text="@string/signup"
             android:layout_marginTop="30dp"
-            android:textColor="@color/white"/>
+            android:fontFamily="sans-serif"
+            android:text="@string/signup"
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -131,6 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:fontFamily="cursive"
                 android:text="@string/acct_exist"
                 android:textColor="@color/btn_nd_txt" />
 
@@ -138,12 +147,13 @@
                 android:id="@+id/signin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/signin"
-                android:textStyle="bold"
-                android:textColor="@color/btn_nd_txt"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="16dp"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:fontFamily="sans-serif"
+                android:text="@string/signin"
+                android:textColor="@color/btn_nd_txt"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 

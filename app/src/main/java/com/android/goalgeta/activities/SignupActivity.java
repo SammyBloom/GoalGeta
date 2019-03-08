@@ -1,13 +1,22 @@
-package com.android.goalgeta;
+package com.android.goalgeta.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.goalgeta.R;
+import com.android.goalgeta.api.RetrofitClient;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -61,10 +70,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+
+
     private void userSignUp(){
 
-        String username = mUsername.getText().toString().trim();
-        String email = mEmail.getText().toString().trim();
+        final String username = mUsername.getText().toString().trim();
+        final String email = mEmail.getText().toString().trim();
         String phoneNo = mPhoneNo.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
         String cnfPassword = mCnfPassword.getText().toString().trim();
@@ -82,11 +93,11 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             mEmail.requestFocus();
             return;
         }
-        if (Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            mEmail.setError("Incorrect Email");
-            mEmail.requestFocus();
-            return;
-        }
+//        if (email.contains("@")){
+//            mEmail.setError("Incorrect Email");
+//            mEmail.requestFocus();
+//            return;
+//        }
 
         //Validation for phone number
         if (phoneNo.isEmpty()){
@@ -123,6 +134,73 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             mCnfPassword.requestFocus();
             return;
         }
+
+        Call<ResponseBody> call = RetrofitClient.getInstance().getApi().register(username, email, phoneNo, password);
+
+//        call.enqueue(new Callback<Response>() {
+//            @Override
+//            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+//                if (response.code() == 201){
+//
+//                    Response dr = response.body();
+//                    Toast.makeText(SignupActivity.this, dr.getMsg(), Toast.LENGTH_SHORT).show();
+//
+//                } else {
+//                    Toast.makeText(SignupActivity.this, "User already exist", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Response> call, Throwable t) {
+//
+//            }
+//        });
+        call.enqueue(new Callback<ResponseBody>() {
+//            /**
+//             * Invoked for a received HTTP response.
+//             * <p>
+//             * Note: An HTTP response may still indicate an application-level failure such as a 404 or 500.
+//             * Call {@link Response#isSuccessful()} to determine if the response indicates success.
+//             *
+//             * @param call
+//             * @param response
+//             */
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                String s = null;
+
+                try {
+                    if (response.code() == 201){
+                        s = response.body().string();
+                        Toast.makeText(SignupActivity.this, s, Toast.LENGTH_SHORT).show();
+                    } else {
+                        s = response.errorBody().string();
+                        Toast.makeText(SignupActivity.this, s, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+//                if (s != null){
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(s);
+//                        Toast.makeText(SignupActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+////                        The data type used here depends on the the type of data used. Check your toast message
+////                        boolean error = jsonObject.getBoolean("error");
+//                    } catch (JSONException e){
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                call.cancel();
+                Toast.makeText(SignupActivity.this, "Please check your network connection and internet permission", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }
