@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorHint">@color/btn_nd_txt</item>
     </style>
+    
+    <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name ="android:windowBackground">@drawable/splash_screen</item>
+    </style>
 
     <!-- Style for colored capital text. -->
     <style name="blue_text" parent="TextAppearance.AppCompat">

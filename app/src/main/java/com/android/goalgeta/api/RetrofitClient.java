@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static final String BASE_URL = "";
+    private static final String BASE_URL = "https://goalnew.herokuapp.com/api/";
     private static RetrofitClient myInstance;
     private Retrofit retrofit;
 
