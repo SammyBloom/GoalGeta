@@ -38,7 +38,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
             android:fontFamily="sans-serif"
-            android:text="@string/user"
+            android:text="@string/prompt_email"
             android:textColor="@color/btn_nd_txt"
             android:textSize="18sp" />
 
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content">
 
                 <AutoCompleteTextView
-                    android:id="@+id/username_login"
+                    android:id="@+id/email_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/editext" />

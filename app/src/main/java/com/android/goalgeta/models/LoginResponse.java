@@ -2,25 +2,51 @@ package com.android.goalgeta.models;
 
 public class LoginResponse {
 
-    private boolean error;
-    private String message;
-    private User user;
+    LoginResponse LoginResponseObject;
 
-    public LoginResponse(boolean error, String message, User user) {
-        this.error = error;
-        this.message = message;
-        this.user = user;
+
+    // Getter Methods
+
+    public LoginResponse getLoginResponse() {
+        return LoginResponseObject;
     }
 
-    public boolean isError() {
-        return error;
+    // Setter Methods
+
+    public void setLoginResponse(LoginResponse  loginResponseObject) {
+        this.LoginResponseObject = loginResponseObject;
     }
 
-    public String getMessage() {
-        return message;
+    private boolean success;
+    User UserObject;
+    private String token;
+
+
+    // Getter Methods
+
+    public boolean getSuccess() {
+        return success;
     }
 
     public User getUser() {
-        return user;
+        return UserObject;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    // Setter Methods
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public void setUser(User userObject) {
+        this.UserObject = userObject;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

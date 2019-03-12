@@ -19,7 +19,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     //objects of fields required
-    private AutoCompleteTextView mUsername;
+    private AutoCompleteTextView mEmail;
     private EditText mPassword;
 
     @Override
@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         //Initialize edit text fields
-        mUsername = (AutoCompleteTextView) findViewById(R.id.username_login);
+        mEmail = (AutoCompleteTextView) findViewById(R.id.email_login);
         mPassword = (EditText) findViewById(R.id.password_login);
 
         //Initalize text buttons and buttons
@@ -60,13 +60,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void userLogin(){
-        String username = mUsername.getText().toString().trim();
+        String email = mEmail.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
 
         //Validation for username for login
-        if (username.isEmpty()){
-            mUsername.setError("Username is required");
-            mUsername.requestFocus();
+        if (email.isEmpty()){
+            mEmail.setError("Username is required");
+            mEmail.requestFocus();
             return;
         }
 
@@ -81,20 +81,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(username, password);
-
+        Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(email, password);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                LoginResponse loginResponse = response.body();
-
-                if (!loginResponse.isError()){
-//                    Proceed with the login, save user and open profile
-                    Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                    Intent dashintent = new Intent(LoginActivity.this, DashboardActivity.class);
-                    startActivity(dashintent);
+                
+                if (response.code() == 200){
+//                    proceed with login
+                    Toast.makeText(LoginActivity.this, "Login Successl", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Account not found", Toast.LENGTH_LONG).show();
                 }
             }
 
