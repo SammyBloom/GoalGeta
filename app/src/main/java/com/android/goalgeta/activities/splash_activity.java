@@ -1,6 +1,5 @@
 package com.android.goalgeta.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -13,9 +12,9 @@ public class splash_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_activity);
 
-        Intent intent = new Intent(getApplicationContext(),
-                MainActivity.class);
-        startActivity(intent);
-        finish();
+//        Intent intent = new Intent(getApplicationContext(),
+//                MainActivity.class);
+//        startActivity(intent);
+//        finish();
     }
 }

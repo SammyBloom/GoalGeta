@@ -122,7 +122,7 @@
         </RelativeLayout>
 
         <Button
-            android:id="@+id/signup"
+            android:id="@+id/signupReg"
             style="@style/btn"
             android:layout_marginTop="30dp"
             android:fontFamily="sans-serif"

@@ -47,7 +47,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/signup"
+            android:id="@+id/signupMan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"

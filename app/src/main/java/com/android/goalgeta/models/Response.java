@@ -1,25 +1,51 @@
 package com.android.goalgeta.models;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Response {
-    //    Use the required data type
-    @SerializedName("error")
-    public boolean error;
+    Response ResponseObject;
 
-    @SerializedName("message")
-    private String msg;
 
-    public Response(boolean error, String msg) {
-        this.error = error;
-        this.msg = msg;
+    // Getter Methods
+
+    public Response getData() {
+        return ResponseObject;
     }
 
-    public boolean isError() {
-        return error;
+    // Setter Methods
+
+    public void setData(Response dataObject) {
+        this.ResponseObject = dataObject;
     }
 
-    public String getMsg() {
-        return msg;
+    User UserObject;
+    private boolean success;
+    private String Bearer;
+
+
+    // Getter Methods
+
+    public boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public User getUser() {
+        return UserObject;
+    }
+
+    // Setter Methods
+
+    public void setUser(User userObject) {
+        this.UserObject = userObject;
+    }
+
+    public String getBearer() {
+        return Bearer;
+    }
+
+    public void setBearer(String Bearer) {
+        this.Bearer = Bearer;
     }
 }
