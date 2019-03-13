@@ -142,7 +142,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
-
+                Toast.makeText(SignupActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 //

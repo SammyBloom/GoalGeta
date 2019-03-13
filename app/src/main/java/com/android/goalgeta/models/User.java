@@ -6,7 +6,10 @@ public class User {
     private String phone_number;
     private String updated_at;
     private String created_at;
-    private float id;
+    private int id;
+
+    public User(int id, String email, String username, String phone_number) {
+    }
 
 
     // Getter Methods
@@ -31,7 +34,7 @@ public class User {
         return created_at;
     }
 
-    public float getId() {
+    public int getInt() {
         return id;
     }
 
@@ -57,7 +60,7 @@ public class User {
         this.created_at = created_at;
     }
 
-    public void setId(float id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.goalgeta.R;
+import com.android.goalgeta.storage.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,5 +34,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent intent = new Intent(this, DashboardActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
     }
 }

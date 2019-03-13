@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.android.goalgeta.R;
 import com.android.goalgeta.api.RetrofitClient;
 import com.android.goalgeta.models.LoginResponse;
+import com.android.goalgeta.storage.SharedPrefManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,6 +60,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent intent = new Intent(this, DashboardActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+    }
+
     private void userLogin(){
         String email = mEmail.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
@@ -85,12 +97,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                
+
+                LoginResponse loginResponse = response.body();
                 if (response.code() == 200){
 //                    proceed with login
-                    Toast.makeText(LoginActivity.this, "Login Successl", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+                    SharedPrefManager.getInstance(LoginActivity.this).saveUser(loginResponse.getUser());
+
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(LoginActivity.this, "Account not found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, loginResponse.getMessage() , Toast.LENGTH_LONG).show();
                 }
             }
 

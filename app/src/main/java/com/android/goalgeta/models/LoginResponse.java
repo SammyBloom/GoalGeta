@@ -20,6 +20,8 @@ public class LoginResponse {
     private boolean success;
     User UserObject;
     private String token;
+    private boolean error;
+    private String message;
 
 
     // Getter Methods
@@ -48,5 +50,25 @@ public class LoginResponse {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    // Getter Methods
+
+    public boolean getError() {
+        return error;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    // Setter Methods
+
+    public void setError(boolean error) {
+        this.error = error;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
