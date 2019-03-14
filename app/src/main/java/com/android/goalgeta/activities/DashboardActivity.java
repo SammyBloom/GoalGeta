@@ -1,6 +1,5 @@
 package com.android.goalgeta.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -14,10 +13,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.goalgeta.R;
+import com.android.goalgeta.api.RetrofitClient;
+import com.android.goalgeta.models.ProfileResponse;
 import com.android.goalgeta.models.User;
 import com.android.goalgeta.storage.SharedPrefManager;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,18 +54,21 @@ public class DashboardActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        View hView = navigationView.inflateHeaderView(R.layout.nav_header_dashboard);
+        userName = (TextView)hView.findViewById(R.id.user_name);
+        eMail = (TextView)hView.findViewById(R.id.user_email);
+
         navigationView.setNavigationItemSelectedListener(this);
 
-//        Header dashboard information
-        userName = (TextView) findViewById(R.id.user_name);
-        eMail = (TextView) findViewById(R.id.user_email);
+        userProfile();
 
-        User user = SharedPrefManager.getInstance(this).getUser();
-        userName.setText(user.getName());
-        eMail.setText(user.getEmail());
-
+//        Takes the user back to the login screen if user is not logged in
+//        if (!SharedPrefManager.getInstance(this).isLoggedIn()){
+//            finish();
+//            startActivity(new Intent(this, LoginActivity.class));
+//        }
     }
-
 
     @Override
     public void onBackPressed() {
@@ -71,22 +80,12 @@ public class DashboardActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (!SharedPrefManager.getInstance(this).isLoggedIn()){
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-            startActivity(intent);
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard, menu);
+
         return true;
     }
 
@@ -109,6 +108,7 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
@@ -129,4 +129,24 @@ public class DashboardActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void userProfile(){
+
+        Call<ProfileResponse> call = RetrofitClient.getInstance().getApi().profile(LoginActivity.token);
+        call.enqueue(new Callback<ProfileResponse>() {
+            @Override
+            public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
+
+                User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+                userName.setText(user.getName());
+                eMail.setText(user.getEmail());
+            }
+
+            @Override
+            public void onFailure(Call<ProfileResponse> call, Throwable t) {
+                Toast.makeText(DashboardActivity.this, "error", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 }

@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //objects of fields required
     private AutoCompleteTextView mEmail;
     private EditText mPassword;
+    public static String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,15 +102,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 LoginResponse loginResponse = response.body();
                 if (response.code() == 200){
 //                    proceed with login
+                    finish();
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
-                    SharedPrefManager.getInstance(LoginActivity.this).saveUser(loginResponse.getUser());
 
-                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(loginResponse.getUser());
+//                    token = loginResponse.getToken();
 
-                    startActivity(intent);
+//                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
                 } else {
-                    Toast.makeText(LoginActivity.this, loginResponse.getMessage() , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), loginResponse.getMessage() , Toast.LENGTH_LONG).show();
                 }
             }
 

@@ -34,7 +34,7 @@ public class User {
         return created_at;
     }
 
-    public int getInt() {
+    public int getId() {
         return id;
     }
 

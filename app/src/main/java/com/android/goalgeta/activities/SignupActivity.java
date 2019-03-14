@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.android.goalgeta.R;
 import com.android.goalgeta.api.RetrofitClient;
 import com.android.goalgeta.models.Response;
+import com.android.goalgeta.storage.SharedPrefManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -135,6 +136,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.code() == 200){
                     Toast.makeText(SignupActivity.this, "Account created successfully", Toast.LENGTH_LONG).show();
+
+                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(response.body().getUser());
+                    startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+
                 } else {
                     Toast.makeText(SignupActivity.this, "User already exist", Toast.LENGTH_LONG).show();
                 }

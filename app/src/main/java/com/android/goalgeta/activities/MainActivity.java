@@ -34,16 +34,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (SharedPrefManager.getInstance(this).isLoggedIn()){
-            Intent intent = new Intent(this, DashboardActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+//        If user is already logged in, open dashboard
+        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+//            Intent intent = new Intent(this, DashboardActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            finish();
+            startActivity(new Intent(this, DashboardActivity.class));
         }
     }
+
 }
