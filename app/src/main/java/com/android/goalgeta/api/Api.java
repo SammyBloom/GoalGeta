@@ -1,8 +1,6 @@
 package com.android.goalgeta.api;
 
-import com.android.goalgeta.models.LoginResponse;
-import com.android.goalgeta.models.ProfileResponse;
-import com.android.goalgeta.models.Response;
+import com.android.goalgeta.models.ResponseObb;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -15,7 +13,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST ("register")
-    Call<Response>register(
+    Call<ResponseObb>register(
             @Field("name") String username,
             @Field("email") String email,
             @Field("phone_number") String phoneNo,
@@ -26,13 +24,13 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("login")
-    Call<LoginResponse>login(
+    Call<ResponseObb>login(
             @Field("email") String email,
             @Field("password") String password
     );
 
     @GET("profile")
-    Call<ProfileResponse>profile(@Header("Authorization") String authToken);
+    Call<ResponseObb>profile(@Header("Authorization") String authToken);
 
 
 }

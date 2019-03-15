@@ -17,8 +17,7 @@ import android.widget.Toast;
 
 import com.android.goalgeta.R;
 import com.android.goalgeta.api.RetrofitClient;
-import com.android.goalgeta.models.ProfileResponse;
-import com.android.goalgeta.models.User;
+import com.android.goalgeta.models.ResponseObb;
 import com.android.goalgeta.storage.SharedPrefManager;
 
 import retrofit2.Call;
@@ -29,6 +28,7 @@ public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView userName, eMail;
+    String token;
     SharedPrefManager  mysharedpref = new SharedPrefManager(this);
 
     @Override
@@ -38,6 +38,7 @@ public class DashboardActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        token = getIntent().getStringExtra("token");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +56,7 @@ public class DashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        View hView = navigationView.inflateHeaderView(R.layout.nav_header_dashboard);
+        View hView = navigationView.getHeaderView(0);
         userName = (TextView)hView.findViewById(R.id.user_name);
         eMail = (TextView)hView.findViewById(R.id.user_email);
 
@@ -131,20 +132,23 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     private void userProfile(){
+       // String token = LoginActivity.token;
 
-        Call<ProfileResponse> call = RetrofitClient.getInstance().getApi().profile(LoginActivity.token);
-        call.enqueue(new Callback<ProfileResponse>() {
+        Call<ResponseObb> call = RetrofitClient.getInstance().getApi().profile(token);
+        call.enqueue(new Callback<ResponseObb>() {
             @Override
-            public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
+            public void onResponse(Call<ResponseObb> call, Response<ResponseObb> response) {
 
-                User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
-                userName.setText(user.getName());
-                eMail.setText(user.getEmail());
+                ResponseObb details = response.body();
+
+
+                userName.setText(details.getData().getUser().getName());
+                eMail.setText(details.getData().getUser().getEmail());
             }
 
             @Override
-            public void onFailure(Call<ProfileResponse> call, Throwable t) {
-                Toast.makeText(DashboardActivity.this, "error", Toast.LENGTH_LONG).show();
+            public void onFailure(Call<ResponseObb> call, Throwable t) {
+                Toast.makeText(DashboardActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

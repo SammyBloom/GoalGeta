@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.android.goalgeta.R;
 import com.android.goalgeta.api.RetrofitClient;
-import com.android.goalgeta.models.LoginResponse;
+import com.android.goalgeta.models.ResponseObb;
 import com.android.goalgeta.storage.SharedPrefManager;
 
 import retrofit2.Call;
@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        this.setFinishOnTouchOutside(false);
 
         //Initialize edit text fields
         mEmail = (AutoCompleteTextView) findViewById(R.id.email_login);
@@ -94,31 +95,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        Call<LoginResponse> call = RetrofitClient.getInstance().getApi().login(email, password);
-        call.enqueue(new Callback<LoginResponse>() {
+        Call<ResponseObb> call = RetrofitClient.getInstance().getApi().login(email, password);
+        call.enqueue(new Callback<ResponseObb>() {
             @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+            public void onResponse(Call<ResponseObb> call, Response<ResponseObb> response) {
 
-                LoginResponse loginResponse = response.body();
+                ResponseObb loginResponse = response.body();
                 if (response.code() == 200){
 //                    proceed with login
-                    finish();
+
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
 
-                    startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(loginResponse.getUser());
-//                    token = loginResponse.getToken();
+                    String token = loginResponse.getData().getToken();
+
+                    Toast.makeText(LoginActivity.this, token, Toast.LENGTH_SHORT).show();
+
+                    Intent dashboard = new Intent(LoginActivity.this,DashboardActivity.class);
+                    dashboard.putExtra("token",token);
+                    startActivity(dashboard);
+
+               //     startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+               //     token = response.body().getToken().header("Authorization", token);
 
 //                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
 //                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 } else {
-                    Toast.makeText(getApplicationContext(), loginResponse.getMessage() , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), String.valueOf(loginResponse.getData().getSuccess()), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+            public void onFailure(Call<ResponseObb> call, Throwable t) {
 
             }
         });

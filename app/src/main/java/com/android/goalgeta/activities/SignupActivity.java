@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.android.goalgeta.R;
 import com.android.goalgeta.api.RetrofitClient;
-import com.android.goalgeta.models.Response;
+import com.android.goalgeta.models.ResponseObb;
 import com.android.goalgeta.storage.SharedPrefManager;
 
 import retrofit2.Call;
@@ -130,14 +130,14 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
-        Call<Response> call = RetrofitClient.getInstance().getApi().register(username, email, phoneNo, password, cnfPassword);
-        call.enqueue(new Callback<Response>() {
+        Call<ResponseObb> call = RetrofitClient.getInstance().getApi().register(username, email, phoneNo, password, cnfPassword);
+        call.enqueue(new Callback<ResponseObb>() {
             @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+            public void onResponse(Call<ResponseObb> call, retrofit2.Response<ResponseObb> response) {
                 if (response.code() == 200){
                     Toast.makeText(SignupActivity.this, "Account created successfully", Toast.LENGTH_LONG).show();
 
-                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(response.body().getUser());
+                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(response.body().getData().getUser());
                     startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
 
                 } else {
@@ -146,7 +146,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
+            public void onFailure(Call<ResponseObb> call, Throwable t) {
                 Toast.makeText(SignupActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

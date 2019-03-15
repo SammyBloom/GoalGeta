@@ -7,13 +7,16 @@ import com.android.goalgeta.models.User;
 
 public class SharedPrefManager {
 
-    public static final String SHARED_PREF_NAME = "my_shared_pref_name";
+    private static final String SHARED_PREF_NAME = "my_shared_pref_name";
     public static SharedPrefManager myInstance;
 
-    public static final String ID = "id";
-    public static final String NAME = "username";
-    public static final String EMAIL = "email";
-    public static final String PHONE_NO = "phone_number";
+    private static final String ID = "id";
+    private static final String NAME = "username";
+    private static final String EMAIL = "email";
+    private static final String PHONE_NO = "phone_number";
+    private static final String CREATED = "created_at";
+    private static final String UPDATED = "updated_at";
+
 
     private Context mCtx;
 
@@ -42,6 +45,8 @@ public class SharedPrefManager {
             editor.putString("email", user.getEmail());
             editor.putString("username", user.getName());
             editor.putString("phone_number", user.getPhone_number());
+            editor.putString("created_at", user.getCreated_at());
+            editor.putString("updated_at", user.getUpdated_at());
 
             editor.apply();
         }
@@ -60,7 +65,9 @@ public class SharedPrefManager {
                 sharedPreferences.getInt(ID, 0),
                 sharedPreferences.getString(EMAIL, null),
                 sharedPreferences.getString(NAME, null),
-                sharedPreferences.getString(PHONE_NO, null)
+                sharedPreferences.getString(PHONE_NO, null),
+                sharedPreferences.getString(CREATED, null),
+                sharedPreferences.getString(UPDATED, null)
                 );
     }
 
